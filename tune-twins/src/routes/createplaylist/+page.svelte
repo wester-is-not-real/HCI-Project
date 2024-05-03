@@ -1,11 +1,13 @@
 <script lang="ts">
     import { goto } from '$app/navigation';
     import green_checkmark from '$lib/images/green_checkmark.png';
+    import { playlists } from '$lib/stores';
     
     let pressedStates = Array(4).fill(false);
 
     function selection(key: number){
         pressedStates[key] = !pressedStates[key];
+        $playlists[key] = !$playlists[key];
     }
 
 </script>

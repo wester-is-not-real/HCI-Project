@@ -3,17 +3,18 @@
   import { themeChange } from 'theme-change';
   import AccountBubble from './AccountBubble.svelte';
   import theme_icon from '$lib/images/theme_icon.png';
-  import { page } from '$app/stores';
-    import { redirect } from '@sveltejs/kit';
-    import { goto } from '$app/navigation';
+  import { goto } from '$app/navigation';
+  import { playlists } from '$lib/stores';
   // let signedIn = false;
   // initialize theme change
   function goHome() {
+    playlists.set([false,false,false,false]);
     goto('/');
   }
   onMount(() => {
     themeChange(false);
   });
+
 </script>
 
 <!-- Navigation Bar Svelte Component -->
@@ -41,6 +42,7 @@
           <li><input data-set-theme="halloween" data-act-class="ACTIVECLASS" type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Halloween" value="halloween"/></li>
           <li><input data-set-theme="retro" data-act-class="ACTIVECLASS" type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Retro" value="retro"/></li>
           <li><input data-set-theme="valentine" data-act-class="ACTIVECLASS" type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Valentine" value="valentine"/></li>
+          <li><input data-set-theme="forest" data-act-class="ACTIVECLASS" type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Forest" value="forest"/></li>
         </ul>
       </section>
       <AccountBubble />

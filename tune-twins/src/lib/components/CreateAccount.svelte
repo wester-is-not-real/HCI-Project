@@ -6,6 +6,10 @@
         $isCreateAccountModalOpen = false;
         $invalidAuth = false;
     }
+    function createAccount() {
+        document.cookie = 'access' + "=" + ('true' || "") + "; path=/";
+        window.location.reload();
+  }
 </script>
 
 <dialog id="my_modal_2" class="modal" class:modal-open={$isCreateAccountModalOpen}>
@@ -16,7 +20,7 @@
                 <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" on:click={closeModal}>✕</button>
                 <!-- <button class="label-text-alt link link-hover" on:click={openSecondModal}>Create an account</button> -->
             </form>
-            <form class="card-body" method="post" action="auth/?/createAccount">
+            <form class="card-body">
                 <div class="form-control">
                     <label class="label">
                         <span class="label-text">Enter your email</span>
@@ -37,7 +41,7 @@
                     <p class="text-error font-semibold ml-2 mt-2">Passwords do not match</p>
                 {/if}
                 <div class="form-control mt-6">
-                    <button class="btn btn-primary" type = "submit">Create Account</button>
+                    <button class="btn btn-primary" on:click={createAccount}>Create Account</button>
                 </div>
             </form>
         </div>

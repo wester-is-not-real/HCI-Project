@@ -1,5 +1,6 @@
 <script>
-  import { invalidAuth, isSignInModalOpen } from "$lib/stores";
+    import { goto } from "$app/navigation";
+  import { invalidAuth, isSignInModalOpen, platformIndex, signedIn } from "$lib/stores";
   import { createEventDispatcher } from 'svelte';
 
   const dispatch = createEventDispatcher();
@@ -11,6 +12,12 @@
   function close() {
     $isSignInModalOpen = false;
     $invalidAuth = false;
+  }
+  
+  function login() {
+    document.cookie = 'access' + "=" + ('true' || "") + "; path=/";
+    document.cookie = 'platform' + "=" + ($platformIndex || "") + "; path=/";
+    window.location.reload();
   }
 
 </script>
@@ -28,7 +35,7 @@
             <form method="dialog">
                 <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" on:click={close}>✕</button>
             </form>
-            <form class="card-body" method="post" action="auth/?/login">
+            <form class="card-body">
                 <div class="form-control">
                     <label class="label">
                         <span class="label-text">Email</span>
@@ -49,7 +56,7 @@
                     <p class="text-error font-semibold ml-2 mt-2">Email or password is not valid</p>
                 {/if}
                 <div class="form-control mt-6">
-                    <button class="btn btn-primary" type = "submit">Login</button>
+                    <button class="btn btn-primary" on:click={login}>Login</button>
                 </div>
             </form>
         </div>
